@@ -2,7 +2,7 @@
 <html lang="en" ng-controller="MainController">
 <head>
     <meta charset="utf-8">
-    <title>Teamnet bootstrap</title>
+    <title>ZTH Platform</title>
     <meta name="author" content="Teamnet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -164,12 +164,6 @@
                                 <span translate="global.menu.account.sessions">Sessions</span></a>
                             </a>
                         </li>
-                        <li ng-switch-when="true" ng-if="databaseSynchronizationAllowed">
-                            <a href="#/syncDb">
-                                <i class="fa fa-cog"></i>
-                                <span translate="global.menu.account.dbSync">Synchronize DB</span>
-                            </a>
-                        </li>
                         <li role="separator" class="divider" ng-switch-when="true"></li>
                         <li class="dropdown-header" ng-switch-when="true" translate="global.menu.account.security">
                             Security
@@ -278,18 +272,7 @@
         </div>
         <!--End Content-->
     </div>
-    <div class="row" ng-switch-when="false">
-        <!--Start Content-->
-        <div id="content"
-             class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 container-fluid " ng-view="">
-                </div>
-            </div>
 
-        </div>
-        <!--End Content-->
-    </div>
 </div>
 <!--End Container-->
 
