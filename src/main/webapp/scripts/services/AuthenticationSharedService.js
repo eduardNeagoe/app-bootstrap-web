@@ -43,9 +43,10 @@ bootstrapServices.factory('AuthenticationSharedService',['$rootScope', '$http', 
                             } else {
                                 $rootScope.$broadcast("event:auth-loginConfirmed");
                                 $rootScope.$broadcast("event:get-account-information", data);
-
-                                if (data.moduleRights.SETTINGS_READ_ACCESS != null) {
-                                    $rootScope.hasSettingsAccess = true;
+                                for(var i = 0; i < data.roles.length; i++) {
+                                    if(data.roles[i].id == 2) {
+                                        $rootScope.hasSettingsAccess = true;
+                                    }
                                 }
                             }
                         });
