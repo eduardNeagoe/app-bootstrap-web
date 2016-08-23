@@ -3,17 +3,31 @@ bootstrapServices.factory('Functionality', ['FileItem','AppGridMetadataBuilder',
     return{
         init: function (scope, entity, Service) {
 
+            var string = 'news';
+            var myURL = 'app/';
+            if(entity == string) {
+                   myURL += 'public/';
+            }
+            else
+                myURL+= 'rest/';
+            myURL += entity + '/list';
             scope.setTitle = function (title) {
                 scope.functionality = title;
             };
+
+
+
 
             scope.$root.$on(entity + 'GridSelection', function (data) {
                 scope[entity].actions.onRowSelect();
             });
 
+
             scope[entity] = {
+
                 grid:{
-                    url: 'app/rest/' + entity + '/list',
+
+                    url: myURL,
                     id: entity,
                     customOptions : {
                         enableRowSelection: true,
