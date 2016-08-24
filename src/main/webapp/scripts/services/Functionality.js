@@ -3,13 +3,15 @@ bootstrapServices.factory('Functionality', ['FileItem','AppGridMetadataBuilder',
     return{
         init: function (scope, entity, Service) {
 
-            var string = 'news';
+            var stringNews = 'news';
+            var stringQuestions = 'questionType';
             var myURL = 'app/';
-            if(entity == string) {
+            if(entity == stringNews || entity == stringQuestions) {
                    myURL += 'public/';
             }
-            else
+            else{
                 myURL+= 'rest/';
+            }
             myURL += entity + '/list';
             scope.setTitle = function (title) {
                 scope.functionality = title;
