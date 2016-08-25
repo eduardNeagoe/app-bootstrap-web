@@ -45,6 +45,12 @@ bootstrapControllers
                 return role.id == $scope.selectedRole.id;
             };
 
+            var clearState = function(){
+            	$scope.isView = false;
+            	$scope.isAdd = false;
+            	$scope.isEdit = false;
+            };
+
             $scope.selectRole = function(role){
                 $scope.loading = true;
                 Role.get({roleId: role.id}, function(res){
@@ -214,11 +220,7 @@ bootstrapControllers
                 $scope.selectedModules.type = 'add';
             };
 
-            var clearState = function(){
-                $scope.isView = false;
-                $scope.isAdd = false;
-                $scope.isEdit = false;
-            };
+
 
             var getRoles = function(){
                 var deferred = $q.defer();

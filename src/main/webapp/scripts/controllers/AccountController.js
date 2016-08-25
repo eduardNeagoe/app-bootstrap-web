@@ -2,7 +2,7 @@
  * Created by mihai.vaduva on 3/17/15.
  */
 bootstrapControllers
-    .controller('AccountController', ['$scope', '$rootScope', '$http', '$q', 'Notification', '$animate', 'utils', 'Role', 'Permission', 'Account', function ($scope, $rootScope, $http, $q, Notification, $animate, utils, Role, Permission, Account) {
+    .controller('AccountController', ['$scope', '$rootScope', '$http', '$q', 'Notification', '$animate', 'utils', 'Role', 'Permission', 'Account', 'PublicRegister', function ($scope, $rootScope, $http, $q, Notification, $animate, utils, Role, Permission, Account, PublicRegister) {
 
         $scope.accounts = [];
         $scope.roles = [];
@@ -13,6 +13,7 @@ bootstrapControllers
 
         $scope.isView = true;
         $scope.isEdit = false;
+		$scope.isAdd = false;
 
         $scope.loading = false;
 
@@ -28,6 +29,12 @@ bootstrapControllers
 
         $scope.isSelected = function (account) {
             return account.id === $scope.selectedAccount.id;
+        };
+
+        var clearState = function(){
+			$scope.isView = false;
+			$scope.isAdd = false;
+			$scope.isEdit = false;
         };
 
         $scope.findByProperty = function (array, key, val) {
@@ -113,8 +120,18 @@ bootstrapControllers
             });
         };
 
+        $scope.createAccount = function(){
+        	clearState();
+            $scope.isAdd = true;
+
+            $scope.selectedAccount = {};
+            clearSelectedModuleRights();
+            getAllModuleRights();
+        };
+
         $scope.editAccount = function () {
             $scope.isView = false;
+            $scope.isAdd = false;
             $scope.isEdit = true;
         };
 
@@ -127,17 +144,40 @@ bootstrapControllers
                 })
             });
 
+            if($scope.selectedAccount.active == undefined || $scope.selectedAccount.active == null){
+            	$scope.selectedAccount.active = false;
+            }
+
             $scope.selectedAccount.moduleRights = moduleRights;
 
-            Account.updateAccount($scope.selectedAccount, function (data) {
-                $scope.$broadcast('onSaveAccount', data.id);
-                Notification.success('Account updated');
-                $scope.backAccount();
-            }, function (error) {
-                Notification.error(error.data.errMsg);
-            });
-
-            $scope.saveNewPassword();
+			if($scope.selectedAccount.id !== undefined) {
+				Account.updateAccount($scope.selectedAccount, function (data) {
+					$scope.$broadcast('onSaveAccount', data.id);
+					Notification.success('Account updated');
+					$scope.backAccount();
+				}, function (error) {
+					Notification.error(error.data.errMsg);
+				});
+				$scope.saveNewPassword();
+            } else {
+                        PublicRegister.save($scope.selectedAccount,
+                            function (value, responseHeaders) {
+                                $scope.success = 'OK';
+                                Notification.success('<strong>Registration saved!</strong> Please check your email for confirmation.');
+//                                $location.path('/');
+                            },
+                            function (httpResponse) {
+                                if (httpResponse.status === 409 && httpResponse.data.message === "login") {
+                                    $scope.error = null;
+                                    $scope.errorUserExists = "ERROR";
+                                } else if (httpResponse.status === 409 && httpResponse.data.message === "email") {
+                                    $scope.error = null;
+                                    $scope.errorEmailExists = "ERROR";
+                                } else {
+                                    $scope.error = "ERROR";
+                                }
+                            });
+            }
         };
 
         $scope.saveNewPassword = function () {
@@ -156,6 +196,7 @@ bootstrapControllers
 
         $scope.backAccount = function () {
             $scope.isView = true;
+            $scope.isAdd = false;
             $scope.isEdit = false;
 
             if ($scope.selectedAccount.id != undefined) {

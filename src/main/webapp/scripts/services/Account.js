@@ -20,6 +20,11 @@ bootstrapServices.factory('Account',['$resource', function ($resource) {
         },'updateCurrentAccount':{
             url:'/app/rest/account/update',
             method:'PUT'
+        },
+        'allAccountsExtended': {
+               url: 'app/rest/adminAccount/allAccountsExtended',
+               method: 'GET',
+               isArray: true
         }
     });
 }]);

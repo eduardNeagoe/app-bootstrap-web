@@ -1,8 +1,9 @@
 
-bootstrapControllers.controller('SettingsController',['$scope', 'Account', function ($scope, Account) {
+bootstrapControllers.controller('SettingsController',['$scope', 'Account', 'User', function ($scope, Account, User) {
     $scope.success = null;
     $scope.error = null;
     $scope.settingsAccount = Account.get();
+    $scope.settingsUser = User.get();
 
     $scope.save = function () {
         $scope.success = null;
