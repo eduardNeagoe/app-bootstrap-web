@@ -1,16 +1,18 @@
 <div ng-cloak>
     <div class="row">
 
-        <div class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">
-            <div ng-if="securityEnabled">
-                <div ng-switch="authenticated">
-                    <div class="alert alert-success" ng-switch-when="false"
-                         translate="global.messages.info.authenticated">
-                        If you want to <a href="#/login">authenticate</a>, you can try the default login="admin" and
-                        password="admin".
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--<div class=" col-lg-6 col-md-6 col-sm-12 col-xs-12 col-lg-offset-2 col-md-offset-2 col-sm-offset-0 col-xs-offset-0">-->
+            <!--<div ng-if="securityEnabled">-->
+                <!--<div ng-switch="authenticated">-->
+                    <!--<div class="alert alert-success" ng-switch-when="false"-->
+                         <!--translate="global.messages.info.authenticated">-->
+                        <!--If you want to <a href="#/login">authenticate</a>, you can try the default login="admin" and-->
+                        <!--password="admin".-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="col-md-8">Calendar</div>
+        <div include-static="zth/views/news/newsDetails.html" class="col-md-4"></div>
     </div>
 </div>
