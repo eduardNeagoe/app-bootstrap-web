@@ -1,5 +1,3 @@
-
-
 bootstrapControllers.controller('RegisterController',['$scope', '$translate', 'PublicRegister', '$location', 'Notification', function ($scope, $translate, PublicRegister, $location, Notification) {
     $scope.registerAccount = {
         gender: 'male'
@@ -18,6 +16,7 @@ bootstrapControllers.controller('RegisterController',['$scope', '$translate', 'P
             $scope.error = null;
             $scope.errorUserExists = null;
             $scope.errorEmailExists = null;
+            console.log($scope.registerAccount);
             PublicRegister.save($scope.registerAccount,
                 function (value, responseHeaders) {
                     $scope.success = 'OK';

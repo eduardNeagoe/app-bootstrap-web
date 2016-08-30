@@ -49,7 +49,7 @@
                         <div class="form-group" ng-class="{'has-success': form.git.$dirty && form.git.$valid, 'has-error': form.git.$dirty && form.git.$invalid}">
                             <label>Github</label>
                             <input type="email" class="form-control" name="git" placeholder="{{'settings.form.git_account.placeholder'}}"
-                                   ng-model="settingsAccount.git_account" ng-minlength=5 ng-maxlength=100 required maxlength="100">
+                                   ng-model="settingsAccount.gitURL" ng-minlength=5 ng-maxlength=100 required maxlength="100">
                             <div ng-show="form.git.$dirty && form.git.$invalid">
                                 <p class="help-block"
                                    ng-show="form.git.$error.required">

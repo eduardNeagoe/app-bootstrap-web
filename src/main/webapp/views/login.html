@@ -1,8 +1,7 @@
 <div class="container-fluid">
     <div id="page-login" class="row">
-        <div  include-static='zth/views/news/newsWrapper.html'></div>
-        <div style ="position: fixed; right:0; top:0">
-        <div class="col-xs-12 col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 pull-right">
+        <div include-static='zth/views/news/newsDetails.html' class="col-md-8"></div>
+        <div class="col-md-4 pull-right">
             <div class="panel panel-default pull-right">
                 <form class="form" role="form">
                     <div class="panel-heading"><h3 class="page-header" translate="login.title">Teamnet Login Page</h3>
@@ -39,18 +38,19 @@
                             <button type="submit" class="btn btn-success btn-block" ng-click="login()"
                                     translate="login.form.button.next.step" ng-switch-when="true">Proceed
                             </button>
-                            <br/><br/><br/><br/>
-                            <div class="alert alert-info" >
-                                Ajuta-ne sa evoluam! <br/>
-                                <a href="#/anonymousFeedback">Completeaza feedback!</a>
-                                <br/><br/><br/><br/>Text care asigura anonimitatea<br/><br/><br/><br/><br/><br/>                            </div>
-                            </div>
-                        <div ng-if="authenticationError">
+                        </div>
+                        <div ng-show="authenticationError">
                             <h4>
                                 <span class="label label-danger" style="position: inherit;"
                                       translate="global.messages.info.authenticationError">Incorrect login!
                                 </span>
                             </h4>
+                        </div>
+                        <br/><br/><br/><br/>
+                        <div class="alert alert-info" >
+                            Ajuta-ne sa evoluam! <br/>
+                            <a href="#/anonymousFeedback">Completeaza feedback!</a>
+                            <br/><br/><br/><br/>Text care asigura anonimitatea<br/><br/><br/><br/><br/><br/>
                         </div>
                     </div>
                 </form>
