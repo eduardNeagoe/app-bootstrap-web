@@ -8,6 +8,5 @@ bootstrapControllers.controller('LoginController', ['$scope', '$location', 'Auth
                 rememberMe: $scope.rememberMe,
                 extraDetails: $scope.extraDetails
             });
-            $location.path('/news');
         }
     }]);
