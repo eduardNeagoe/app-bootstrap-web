@@ -132,7 +132,7 @@ var angularCustomLoader = {
         //handle all modules loading finalisation
         internal.modulePromises.finally(function () {
             internal.modulesLoaded = true;
-            internal.resolveScripts();
+//            internal.resolveScripts();
         });
 
 
