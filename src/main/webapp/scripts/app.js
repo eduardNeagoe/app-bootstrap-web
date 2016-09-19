@@ -306,8 +306,9 @@ bootstrapApp
                         $location.path(pathParams.redirect).search('redirect', null).replace();
                     } else if (pathParams.forward !== undefined) {
                         $window.location.href = pathParams.forward;
-                    }
-                    else {
+                    } else if($rootScope.keepCurrentUrl != undefined) {
+                        $window.location.href = $rootScope.keepCurrentUrl;
+                    } else {
                         $location.path('/').replace();
                     }
                 };
@@ -326,6 +327,15 @@ bootstrapApp
                         $rootScope.$broadcast('event:auth-loginComplete', pathParameters);
                     }
                 });
+
+                $rootScope.$on('$locationChangeStart', function (event, newUrl, oldUrl) {
+                        if(!newUrl.endsWith('/#/') && newUrl.endsWith('/login') && !oldUrl.endsWith('/login') && !oldUrl.endsWith('/logout') && !oldUrl.endsWith('/')) {
+                            $rootScope.keepCurrentUrl = oldUrl;
+                        } else {
+                            $rootScope.keepCurrentUrl = undefined;
+                        }
+                    }
+                );
 
                 // Call when the authentication flow is complete
                 $rootScope.$on('event:auth-loginComplete', function (event, pathParameters) {
@@ -363,7 +373,7 @@ bootstrapApp
                     $location.path('');
                 });
 
-                console.log(angular.element('.auth-data-required'));
+//                console.log(angular.element('.auth-data-required'));
                 angular.element('.auth-data-required').removeClass("auth-data-required");
             }
 
