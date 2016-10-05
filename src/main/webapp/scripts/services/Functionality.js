@@ -4,9 +4,11 @@ bootstrapServices.factory('Functionality', ['FileItem','AppGridMetadataBuilder',
         init: function (scope, entity, Service) {
 
             var stringNews = 'news';
+            var stringUser = 'users'
             var stringQuestions = 'questionType';
             var myURL = 'app/';
-            if(entity == stringNews || entity == stringQuestions) {
+
+            if(entity == stringNews || entity == stringQuestions || entity == stringUser  ) {
                    myURL += 'public/';
             }
             else{
